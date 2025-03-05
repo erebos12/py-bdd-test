@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="py-bdd-test",
-    version="1.0.3",
+    version="1.0.4",
     packages=find_packages(include=["bdd-test", "bdd-test.*"]),
     package_data={"bdd-test": ["features/**/*", "behave.ini"]},
     install_requires=[
         "kafka-python",
         "behave",
-        "hamcrest",
+        "PyHamcrest",
     ],
     author="Your Name",
     author_email="your.email@example.com",
