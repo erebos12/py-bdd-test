@@ -8,7 +8,7 @@ setup(
     install_requires=[
         "kafka-python",
         "behave",
-        "hamcrest",
+        "PyHamcrest",
     ],
     author="Your Name",
     author_email="your.email@example.com",
