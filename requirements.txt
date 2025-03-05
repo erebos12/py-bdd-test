@@ -12,4 +12,3 @@ typing
 python-dotenv
 playwright
 kafka-python
-py-bdd-test

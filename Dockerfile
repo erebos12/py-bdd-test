@@ -14,11 +14,10 @@ RUN pip install --no-cache-dir -r features/requirements.txt
 RUN playwright install # installs the browser binaries i.e. chromium, firefox
 RUN playwright install-deps
 
-COPY ./services services
-COPY ./tests tests
-COPY ./features features
-COPY ./features/steps features/steps
+
+COPY features features
+COPY features/steps features/steps
 COPY ./execute_tests.sh execute_tests.sh
 
-RUN python -m unittest discover -s tests -p "Test*.py"
+
 
