@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py-bdd-test",
-    version="1.0.10",
+    version="1.0.11",
     packages=find_packages(include=["py_bdd_test", "py_bdd_test.*"]),
     package_data={
         "py_bdd_test": ["features/steps/*.py", "features/*.feature"],
