@@ -1,4 +1,2 @@
-include readme.md
-include behave.ini
-recursive-include bdd-test *
+include py_bdd_test/features/steps/*.py
 
