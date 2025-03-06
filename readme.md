@@ -71,12 +71,6 @@ Scenario: Delete user
 
 ---
 
-## 🛠 Available BDD Step Definitions
-
-(Die Liste der BDD-Schritte bleibt unverändert)
-
-
-
 
 ## 🛠 Available BDD Step Definitions
 
@@ -187,7 +181,7 @@ Scenario: Delete user
 
 ✅ kafka_steps.py: 'kafka - consuming json from broker "{broker:String}" and topic "{topic:String}"'
 
-✅ ui_steps.py: 'opening bluconnect login page'
+✅ ui_steps.py: 'opening login page with url "{url:String}"'
 
 ✅ ui_steps.py: 'I enter username and password for user "{username}"'
 
