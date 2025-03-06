@@ -141,7 +141,7 @@ def expect_status_code(context, status_code):
     try:
         json_string = context.json
     except AttributeError:
-        pass
+        pass # if no json in response available
     check_response_code(context.status_code, status_code, json_string)
 
 

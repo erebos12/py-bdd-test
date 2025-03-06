@@ -4,6 +4,7 @@ import json
 import logging
 from hamcrest import *
 
+
 def json_serializer(data):
     return json.dumps(data).encode('utf-8')
 
@@ -39,6 +40,7 @@ def consuming_json_from_kafka(context, broker, topic):
         if len(messages) >= 1:  # Stop after first message for testing
             break
     consumer.close()
+    logging.info("Number of messages received '{}' from Kafka topic '{}'\n".format(len(messages), topic))
     logging.info("Message from Kafka >>> {}\n".format(json.dumps(messages, indent=2)))
-    context.json = messages # save for later steps
+    context.json = messages  # save for later steps
     assert_that(context.json, is_not(empty()))
