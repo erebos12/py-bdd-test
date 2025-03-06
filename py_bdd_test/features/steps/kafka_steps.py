@@ -1,6 +1,7 @@
 from kafka import KafkaProducer
 from kafka import KafkaConsumer
 import json
+import logging
 from hamcrest import *
 
 def json_serializer(data):
