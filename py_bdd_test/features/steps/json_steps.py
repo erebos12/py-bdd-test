@@ -1,5 +1,3 @@
-import json
-
 from utils import *
 from hamcrest import assert_that, is_not, less_than_or_equal_to, not_none, equal_to, matches_regexp, contains_string, empty
 
