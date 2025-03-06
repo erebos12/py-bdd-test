@@ -92,10 +92,10 @@ Feature: Test health-check endpoint
     Then expect response code "200"
 ```
 
-### 📩 Sending JSON to Kafka Test
+### 📩 Sending & consuming messages with Kafka 
 
 ```gherkin
-Feature: Sending JSON to Kafka
+Feature: Sending & consuming JSON by Kafka
 
   Scenario: Send a JSON message to a Kafka topic
     Given following json
@@ -106,16 +106,13 @@ Feature: Sending JSON to Kafka
         }
         """
     When kafka - sending json to broker "kafka:29092" and topic "test-topic"
+
+  Scenario: Consume JSON message from Kafka topic
+      When kafka - consuming json from broker "kafka:29092" and topic "test-topic"
+      Then json attribute "[0]["message"]" is equal to "Hello Kafka"
+      And json attribute "[0]["index"]" is equal to "1"
 ```
 
-### 📩 Consume JSON to Kafka Test
-
-```gherkin
-Scenario: Consume JSON message from Kafka topic
-    When kafka - consuming json from broker "kafka:29092" and topic "test-topic"
-    Then print context json
-    And json attribute "[0]["message"]" is equal to "Hello Kafka"
-```
 
 ### 🧔🏽 Sending POST request to create a user
 
@@ -145,7 +142,9 @@ Scenario: Delete user
 
 ---
 
+
 ## 🛠 Available BDD Step Definitions
+
 
 📌 **BDD Step Definitions Found:**
 
@@ -195,8 +194,7 @@ Scenario: Delete user
 
 ✅ json_steps.py: 'overwrite json attribute "{attribute_name}" with'
 
-✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with json from context-variable "
-{context_variable}"'
+✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with json from context-variable "{context_variable}"'
 
 ✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with following json'
 
