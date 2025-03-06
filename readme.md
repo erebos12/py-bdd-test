@@ -22,8 +22,13 @@ Your project structure should look like this:
 
 ```
 my-project-folder/
-│
-├── bdd-test/
+│── bdd-test/
+│   ├── __init__.py
+│   ├── behave.ini
+│   ├── execute_tests.sh
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── features/
 │
 ├── microservice_1/
 ├── microservice_2/
@@ -37,8 +42,13 @@ Your folder structure should now look like this:
 
 ```
 my-project-folder/
-│
-├── bdd-test/
+│── bdd-test/
+│   ├── __init__.py
+│   ├── behave.ini
+│   ├── execute_tests.sh
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── features/
 │
 ├── microservice_1/
 ├── microservice_2/
@@ -49,7 +59,7 @@ my-project-folder/
 ├── Makefile
 ```
 
-### 4️⃣ Create your own feature file in bdd-test/features
+### 4️⃣ Create your own feature file in `bdd-test/features`
 
 You can see some examples below.
 
@@ -57,9 +67,15 @@ Your folder structure should now look like this:
 
 ```
 my-project-folder/
-│
-├── bdd-test/feature01.feature
-├── bdd-test/feature02.feature            
+│── bdd-test/
+│   ├── __init__.py
+│   ├── behave.ini
+│   ├── execute_tests.sh
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── features/
+│       ├── your_feature_test01.feature
+│       ├── your_feature_test02.feature
 │
 ├── microservice_1/
 ├── microservice_2/
@@ -82,7 +98,7 @@ make it
 
 ## 📌 Feature Examples
 
-### 🩺 Health Check Endpoint Test
+### 🧠 Health Check Endpoint Test
 
 ```gherkin
 Feature: Test health-check endpoint
@@ -92,7 +108,7 @@ Feature: Test health-check endpoint
     Then expect response code "200"
 ```
 
-### 📩 Sending & consuming messages with Kafka 
+### 📩 Sending & consuming messages with Kafka
 
 ```gherkin
 Feature: Sending & consuming JSON by Kafka
@@ -113,8 +129,7 @@ Feature: Sending & consuming JSON by Kafka
       And json attribute "[0]["index"]" is equal to "1"
 ```
 
-
-### 🧔🏽 Sending POST request to create a user
+### 🧐 Sending POST request to create a user
 
 ```gherkin
 Scenario: Create a new user resource
@@ -125,13 +140,13 @@ Scenario: Create a new user resource
           "age": 34
           "gender": "male"
         }
-        """
+    """
     When send "POST" to "http://my-service:8080/users"
     Then expect response code "201"
     And json attribute "["message"]" is equal to "User created"
 ```
 
-### ␡ Sending DELETE request to remove resource
+### ⎋️ Sending DELETE request to remove resource
 
 ```gherkin
 Scenario: Delete user
@@ -141,6 +156,12 @@ Scenario: Delete user
 ```
 
 ---
+
+## 🛠 Available BDD Step Definitions
+
+(Die Liste der BDD-Schritte bleibt unverändert)
+
+
 
 
 ## 🛠 Available BDD Step Definitions
