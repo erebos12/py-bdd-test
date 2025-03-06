@@ -6,12 +6,6 @@ from hamcrest import *
 
 from utils import *
 
-integrateTests = "false"
-from os import environ
-
-if environ.get('INTEGRATE_TESTS') is not None:
-    integrateTests = os.environ['INTEGRATE_TESTS']
-
 
 @given('following csv file content')
 def set_content_for_upload_as_csv_file(context):
@@ -167,8 +161,9 @@ def send_delete_to_simple_url_with_id_appended(context, url, variable):
         pass
 
 
-@when('(bulk load) send "{number_of_requests:Number}" post requests to "{url:String}""{endpoint:String}"')
+@when('bulk load: send "{number_of_requests:Number}" post requests to "{url:String}""{endpoint:String}"')
 def send_load_of_post_requests(context, url, endpoint, number_of_requests):
+    assert_that(context.json, is_not(None))
     success_counter = 0
     failure_counter = 0
     for i in range(number_of_requests):
@@ -196,26 +191,9 @@ def sleep_for(context, secs):
     time.sleep(int(secs))
 
 
-@when('sending request to "{url}""{endpoint}"')
-def get_endpoint(context, url, endpoint):
-    resp = requests.get(urls[url] + endpoint)
-    assert_that(resp.status_code, equal_to(200))
-
-
 @when('send delete to "{url}"')
 def simple_delete_endpoint(context, url):
     response = requests.delete(url)
-    context.status_code = response.status_code
-    assert_that(context.status_code, not_none())
-    try:
-        context.json = response.json()
-    except ValueError:  # no json available
-        pass
-
-
-@when('sending delete to "{url}""{endpoint}"')
-def delete_endpoint(context, url, endpoint):
-    response = requests.delete(urls[url] + endpoint)
     context.status_code = response.status_code
     assert_that(context.status_code, not_none())
     try:
@@ -240,41 +218,6 @@ def read_entry_from_yaml_file(context, yaml_file, dict_entry):
             context.variable = eval(str(parsed_yaml_file) + dict_entry)
         assert_that(context.variable, not_none(),
                     "No value found for variable '{}' from yaml file '{}'".format(dict_entry, yaml_file))
-    except Exception as e:
-        print("Exception >>>>> {}".format(str(e)))
-
-
-@when('send file by post to "{url}""{endpoint}"')
-def send_file_by_post(context, url, endpoint):
-    assert_that(context.file, not_none(), "No file was set in context.")
-    files = {'file': open(context.file, 'rb')}
-    response = requests.post(urls[url] + endpoint, files=files)
-    context.json = response.json()
-    assert_that(context.json, not_none())
-    assert_that(response.status_code, equal_to(200))
-
-
-# Legacy: Don't use this step anymore !!!!
-@DeprecationWarning
-@given('request body in form of python dictionary')
-def python_dictionary_request_body(context):
-    assert_that(context.text, not_none(), "No dictionary was set to send as request body.")
-    try:
-        content = eval(context.text)
-        file_content = content.get("fileContent")
-
-        if file_content is not None:
-            input_json = json.loads(re.sub(r'\'', '"', str(file_content)))
-
-            # create a new csv file based on the given JSON save it and set the reference to this file in the context
-            file_location = '/tests/files/file_for_eater.csv'
-            create_csv_file_by_json(input_json, ";", file_location)
-            content["uploadFile"] = eval("open('" + file_location + "', 'rb')")
-
-            content.pop("fileContent")
-            context.file = content
-        else:
-            context.file = content
     except Exception as e:
         print("Exception >>>>> {}".format(str(e)))
 
@@ -327,6 +270,7 @@ def set_form_data(context, field, value):
     if not hasattr(context, "form_data"):
         context.form_data = {}
     context.form_data[field] = value
+
 
 @when('wait for "{msecs}" msecs')
 def wait_for_msecs(context, msecs):
