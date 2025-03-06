@@ -88,47 +88,6 @@ def delete_endpoint_with_query_param_and_token(context, url, query_params):
         pass
 
 
-@when('sending get to "{url}""{endpoint}"')
-def sending_get(context, url, endpoint):
-    response = requests.get(urls[url] + endpoint)
-    context.status_code = response.status_code
-    assert_that(context.status_code, is_not(None))
-    context.json = response.json()
-    assert_that(context.json, is_not(None))
-    assert_that(context.json, is_not(None))
-
-
-@when('sending post to "{url}""{endpoint}"')
-def sending_post(context, url, endpoint):
-    response = requests.post(urls[url] + endpoint, json=context.json)
-    context.status_code = response.status_code
-    assert_that(context.status_code, is_not(None))
-    context.json = response.json()
-    assert_that(context.json, is_not(None))
-
-
-@when('sending post to "{url}"')
-def sending_post_to_simple_url(context, url):
-    response = requests.post(url, json=context.json)
-    context.status_code = response.status_code
-    assert_that(context.status_code, is_not(None))
-    try:
-        context.json = response.json()
-    except ValueError:  # no json available
-        pass
-
-
-@when('sending get to "{url}"')
-def sending_get_to_simple_url(context, url):
-    response = requests.get(url)
-    context.status_code = response.status_code
-    assert_that(context.status_code, is_not(None))
-    try:
-        context.json = response.json()
-    except:  # no json in response available
-        pass
-
-
 @when('send get to "{url}" append value of context variable "{last_uri_param_value}"')
 def send_get_to_url_and_append_value_to_url(context, url, last_uri_param_value):
     response = requests.get(url + eval(last_uri_param_value))
@@ -163,7 +122,7 @@ def send_delete_to_simple_url_with_id_appended(context, url, variable):
 
 @when('bulk load: send "{number_of_requests:Number}" post requests to "{url:String}""{endpoint:String}"')
 def send_load_of_post_requests(context, url, endpoint, number_of_requests):
-    assert_that(context.json, is_not(None))
+    assert_that(context.json, is_not(None), "Set context.json with step @Given following json before this step!")
     success_counter = 0
     failure_counter = 0
     for i in range(number_of_requests):
@@ -189,17 +148,6 @@ def expect_status_code(context, status_code):
 @then('sleep for "{secs}" sec(s)')
 def sleep_for(context, secs):
     time.sleep(int(secs))
-
-
-@when('send delete to "{url}"')
-def simple_delete_endpoint(context, url):
-    response = requests.delete(url)
-    context.status_code = response.status_code
-    assert_that(context.status_code, not_none())
-    try:
-        context.json = response.json()
-    except ValueError:  # no json available
-        pass
 
 
 @given('following file "{file}"')
@@ -230,17 +178,6 @@ def send_json_file_by_post(context, url):
     context.json = response.json()
     context.status_code = response.status_code
     assert_that(context.json, not_none())
-
-
-@when('sending put to "{url}"')
-def sending_put_to_simple_url(context, url):
-    response = requests.put(url, json=context.json)
-    context.status_code = response.status_code
-    assert_that(context.status_code, is_not(None))
-    try:
-        context.json = response.json()
-    except ValueError:  # no json available
-        pass
 
 
 @when('send "{http_method}" to "{url}"')

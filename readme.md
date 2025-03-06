@@ -118,6 +118,7 @@ Scenario: Create a new user resource
 
 
 
+
 ## 🛠 Available BDD Step Definitions
 
 
@@ -137,14 +138,6 @@ Scenario: Create a new user resource
 
 ✅ http_steps.py: 'sending delete to "{url}" and query param "{query_params:String}" with auth token'
 
-✅ http_steps.py: 'sending get to "{url}""{endpoint}"'
-
-✅ http_steps.py: 'sending post to "{url}""{endpoint}"'
-
-✅ http_steps.py: 'sending post to "{url}"'
-
-✅ http_steps.py: 'sending get to "{url}"'
-
 ✅ http_steps.py: 'send get to "{url}" append value of context variable "{last_uri_param_value}"'
 
 ✅ http_steps.py: 'send get to "{url}" with "{variable}"'
@@ -157,15 +150,11 @@ Scenario: Create a new user resource
 
 ✅ http_steps.py: 'sleep for "{secs}" sec(s
 
-✅ http_steps.py: 'send delete to "{url}"'
-
 ✅ http_steps.py: 'following file "{file}"'
 
 ✅ http_steps.py: 'read variable from yaml file "{yaml_file:String}" and read variable "{dict_entry:String}"'
 
 ✅ http_steps.py: 'send file by post to "{url}"'
-
-✅ http_steps.py: 'sending put to "{url}"'
 
 ✅ http_steps.py: 'send "{http_method}" to "{url}"'
 
