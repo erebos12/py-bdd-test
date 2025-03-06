@@ -1,7 +1,7 @@
 from kafka import KafkaProducer
+from kafka import KafkaConsumer
 import json
 from hamcrest import *
-
 
 def json_serializer(data):
     return json.dumps(data).encode('utf-8')
@@ -17,3 +17,27 @@ def sending_json_to_kafka(context, broker, topic):
     producer.send(topic, context.json)
     producer.flush()
     producer.close()
+
+
+def json_deserializer(data):
+    return json.loads(data.decode('utf-8')) if data else None
+
+
+@then('kafka - consuming json from broker "{broker:String}" and topic "{topic:String}"')
+def consuming_json_from_kafka(context, broker, topic):
+    consumer = KafkaConsumer(
+        topic,
+        bootstrap_servers=[broker],
+        value_deserializer=json_deserializer,
+        auto_offset_reset='earliest',
+        enable_auto_commit=False
+    )
+    messages = []
+    for message in consumer:
+        messages.append(message.value)
+        if len(messages) >= 1:  # Stop after first message for testing
+            break
+
+    consumer.close()
+    assert_that(messages, is_not(empty()))
+    context.json = messages

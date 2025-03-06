@@ -124,6 +124,7 @@ Scenario: Create a new user resource
 
 ---
 
+
 ## 🛠 Available BDD Step Definitions
 
 
@@ -230,6 +231,8 @@ Scenario: Create a new user resource
 ✅ json_steps.py: 'context variable "{context_variable}" is empty'
 
 ✅ kafka_steps.py: 'kafka - sending json to broker "{broker:String}" and topic "{topic:String}"'
+
+✅ kafka_steps.py: 'kafka - consuming json from broker "{broker:String}" and topic "{topic:String}"'
 
 ✅ ui_steps.py: 'opening bluconnect login page'
 
