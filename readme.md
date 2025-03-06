@@ -42,7 +42,28 @@ my-project-folder/
 ├── Makefile
 ```
 
-### 4️⃣ Run the Tests
+### 4️⃣ Create your own feature file in bdd-test/features
+
+You can see some examples below.
+
+Your folder structure should now look like this:
+```
+my-project-folder/
+│
+├── bdd-test/feature01.feature
+├── bdd-test/feature02.feature            
+│
+├── microservice_1/
+├── microservice_2/
+├── ...
+├── microservice_n/
+│
+├── docker-compose-only-tests.yml
+├── Makefile
+```
+
+### 5️⃣ Run the Tests
+
 Execute the following command to run the tests:
 ```sh
 make it
