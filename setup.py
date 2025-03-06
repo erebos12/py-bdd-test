@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py-bdd-test",
-    version="1.0.17",
+    version="1.0.19",
     packages=find_packages(exclude=["bdd-test", "bdd-test.*"]),
     install_requires=[
         "behave",
