@@ -37,7 +37,7 @@ def main():
         print("No step definitions found.")
     else:
         for step in steps:
-            print(f"✅ {step}")
+            print(f"✅ {step}\n")
 
 
 if __name__ == "__main__":
