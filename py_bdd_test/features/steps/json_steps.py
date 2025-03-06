@@ -1,10 +1,12 @@
+import logging
+
 from utils import *
 from hamcrest import assert_that, is_not, less_than_or_equal_to, not_none, equal_to, matches_regexp, contains_string, empty
 
 
 @then('print context json')
 def print_json_context(context):
-    logging.error("CONTEXT.JSON >>> {}".format(json.dumps(context.json, indent=2)))
+    logging.info("CONTEXT.JSON >>> {}\n".format(json.dumps(context.json, indent=2)))
 
 
 @then('overwrite json attribute "{attribute_name}" from file "{file_name}"')
