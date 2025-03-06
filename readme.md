@@ -1,6 +1,8 @@
 # py-bdd-test
 
-**py-bdd-test** is a Python package designed to facilitate **Behavior-Driven Development (BDD)** testing using the `behave` framework. It provides **predefined step definitions** and utilities to streamline the creation and execution of BDD tests. 
+**py-bdd-test** is a Python package designed to facilitate **Behavior-Driven Development (BDD)** testing using the
+`behave` framework. It provides **predefined step definitions** and utilities to streamline the creation and execution
+of BDD tests.
 
 > ⚠️ **Note:** This package **ONLY works in a Dockerized environment**, meaning you must follow the steps below.
 
@@ -9,12 +11,15 @@
 ## 🚀 Installation & Usage
 
 ### 1️⃣ Clone the Repository
+
 ```sh
 git clone https://github.com/erebos12/py-bdd-test.git
 ```
 
 ### 2️⃣ Copy the `bdd-test` Folder Into Your Project
+
 Your project structure should look like this:
+
 ```
 my-project-folder/
 │
@@ -27,7 +32,9 @@ my-project-folder/
 ```
 
 ### 3️⃣ Copy `docker-compose-only-tests.yml` & `Makefile` Into Your Project
+
 Your folder structure should now look like this:
+
 ```
 my-project-folder/
 │
@@ -47,6 +54,7 @@ my-project-folder/
 You can see some examples below.
 
 Your folder structure should now look like this:
+
 ```
 my-project-folder/
 │
@@ -65,6 +73,7 @@ my-project-folder/
 ### 5️⃣ Run the Tests
 
 Execute the following command to run the tests:
+
 ```sh
 make it
 ```
@@ -74,6 +83,7 @@ make it
 ## 📌 Feature Examples
 
 ### 🩺 Health Check Endpoint Test
+
 ```gherkin
 Feature: Test health-check endpoint
 
@@ -83,6 +93,7 @@ Feature: Test health-check endpoint
 ```
 
 ### 📩 Sending JSON to Kafka Test
+
 ```gherkin
 Feature: Sending JSON to Kafka
 
@@ -97,26 +108,36 @@ Feature: Sending JSON to Kafka
     When kafka - sending json to broker "kafka:29092" and topic "test-topic"
 ```
 
+### 📩 Consume JSON to Kafka Test
+
+```gherkin
+Scenario: Consume JSON message from Kafka topic
+    When kafka - consuming json from broker "kafka:29092" and topic "test-topic"
+    Then print context json
+    And json attribute "[0]["message"]" is equal to "Hello Kafka"
+```
 
 ### 🧔🏽 Sending POST request to create a user
+
 ```gherkin
 Scenario: Create a new user resource
     Given following json
     """
-    {
-      "name": "John Smith",
-      "age": 34
-      "gender": "male"
-    }
-    """
+        {
+          "name": "John Smith",
+          "age": 34
+          "gender": "male"
+        }
+        """
     When send "POST" to "http://my-service:8080/users"
     Then expect response code "201"
     And json attribute "["message"]" is equal to "User created"
 ```
 
-### ␡ Sending DELETE request to remove resource 
+### ␡ Sending DELETE request to remove resource
+
 ```gherkin
-  Scenario: Delete user
+Scenario: Delete user
     When send "DELETE" to "http://my-service:8080/users/1234"
     Then expect response code "200"
     And json attribute "["message"]" is equal to "User deleted"
@@ -124,9 +145,7 @@ Scenario: Create a new user resource
 
 ---
 
-
 ## 🛠 Available BDD Step Definitions
-
 
 📌 **BDD Step Definitions Found:**
 
@@ -176,7 +195,8 @@ Scenario: Create a new user resource
 
 ✅ json_steps.py: 'overwrite json attribute "{attribute_name}" with'
 
-✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with json from context-variable "{context_variable}"'
+✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with json from context-variable "
+{context_variable}"'
 
 ✅ json_steps.py: 'partial overwrite of json attribute "{attribute_name}" with following json'
 
