@@ -23,7 +23,7 @@ def json_deserializer(data):
     return json.loads(data.decode('utf-8')) if data else None
 
 
-@then('kafka - consuming json from broker "{broker:String}" and topic "{topic:String}"')
+@when('kafka - consuming json from broker "{broker:String}" and topic "{topic:String}"')
 def consuming_json_from_kafka(context, broker, topic):
     consumer = KafkaConsumer(
         topic,
