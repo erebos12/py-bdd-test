@@ -97,7 +97,25 @@ Feature: Sending JSON to Kafka
     When kafka - sending json to broker "kafka:29092" and topic "test-topic"
 ```
 
+
+### 🧔🏽 Sending POST request to create a user
+```gherkin
+Scenario: Create a new user resource
+    Given following json
+    """
+    {
+      "name": "John Smith",
+      "age": 34
+      "gender": "male"
+    }
+    """
+    When send "POST" to "http://my-service:8080/users"
+    Then expect response code "201"
+    And json attribute "["message"]" is equal to "User created"
+```
+
 ---
+
 
 
 ## 🛠 Available BDD Step Definitions
@@ -223,5 +241,5 @@ Feature: Sending JSON to Kafka
 
 ✅ ui_steps.py: 'I enter username and password for user "{username}"'
 
-✅ ui_steps.py: 'I expect to be logged in successfully and see the landing page from BluConnect'
+✅ ui_steps.py: 'I expect to be logged in successfully and see the landing page'
 

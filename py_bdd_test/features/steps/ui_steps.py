@@ -24,7 +24,7 @@ def enter_credentials(context, username):
         raise e
 
 
-@then('I expect to be logged in successfully and see the landing page from BluConnect')
+@then('I expect to be logged in successfully and see the landing page')
 def verify_login(context):
     try:
         context.page.wait_for_selector('div.main-content')
