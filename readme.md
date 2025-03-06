@@ -78,7 +78,7 @@ make it
 Feature: Test health-check endpoint
 
   Scenario: health-check endpoint
-    When sending get to "http://idemax:8080/health-check"
+    When sending "GET" to "http://idemax:8080/health-check"
     Then expect response code "200"
 ```
 
@@ -114,10 +114,15 @@ Scenario: Create a new user resource
     And json attribute "["message"]" is equal to "User created"
 ```
 
+### ␡ Sending DELETE request to remove resource 
+```gherkin
+  Scenario: Delete user
+    When send "DELETE" to "http://my-service:8080/users/1234"
+    Then expect response code "200"
+    And json attribute "["message"]" is equal to "User deleted"
+```
+
 ---
-
-
-
 
 ## 🛠 Available BDD Step Definitions
 
